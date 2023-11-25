@@ -4,7 +4,7 @@ import React from "react";
 import ImageContainer from "./ImageContainer";
 import addBlurredDataUrls from "@/lib/getBase64";
 import getPrevNextPages from "@/lib/getPrevNextPages";
-import Footer from "./Footer";
+import Pagination from "./Pagination";
 
 type Props = {
   topic?: string | undefined;
@@ -46,7 +46,7 @@ const footerProps = {topic, page, nextPage, prevPage };
           <ImageContainer photo={photo} key={photo.id} />
         ))}
       </section>
-      <Footer {...footerProps}/>
+      <Pagination {...footerProps}/>
     </>
   );
 }

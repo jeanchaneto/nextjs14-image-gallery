@@ -6,13 +6,13 @@ type Props = {
   prevPage: string | null;
   nextPage: string | null;
 };
-function Footer({ topic, page, prevPage, nextPage }: Props) {
+function Pagination({ topic, page, prevPage, nextPage }: Props) {
   if (!prevPage && !nextPage) return;
 
-  const PageNums: number[] = [];
+  const pageNums: number[] = [];
   if (prevPage && nextPage) {
     for (let i = parseInt(prevPage) + 1; i < parseInt(nextPage); i++) {
-      PageNums.push(i);
+      pageNums.push(i);
     }
   }
 
@@ -21,7 +21,7 @@ function Footer({ topic, page, prevPage, nextPage }: Props) {
       href={`/results/${topic}/${nextPage}`}
       className={!prevPage ? "mx-auto" : ""}
     >
-      {!prevPage ? "more" : null}
+      {!prevPage ? "more" : null} &gt;&gt;&gt;
     </Link>
   ) : null;
 
@@ -31,24 +31,27 @@ function Footer({ topic, page, prevPage, nextPage }: Props) {
         href={`/results/${topic}/${prevPage}`}
         className={!nextPage ? "mx-auto" : ""}
       >
-        {!prevPage ? "more" : null}
+        &lt;&lt;&lt; {!nextPage ? "back" : null}
       </Link>
-      {PageNums.map((num) =>
+
+      {pageNums.map((num, i) =>
         page && num === parseInt(page) ? (
-          num
+          <span key={i}>{num}</span>
         ) : (
-          <Link href={`/results/${topic}/${num}`} className="underline" >{num}</Link>
+          <Link key={i} href={`/results/${topic}/${num}`} className="underline">
+            {num}
+          </Link>
         )
       )}
     </>
   ) : null;
 
   return (
-    <footer className="flex flex-row justify-between items-center px-2 py-4 font-bold w-60 mx-auto" >
-        {prevPageArea}
-        {nextPageArea}
+    <footer className="flex flex-row justify-between items-center px-2 py-4 font-bold w-60 mx-auto">
+      {prevPageArea}
+      {nextPageArea}
     </footer>
   );
 }
 
-export default Footer;
+export default Pagination;
