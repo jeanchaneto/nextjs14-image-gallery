@@ -11,7 +11,7 @@ const BasicImageSchema = z.object({
 const PhotoSchema = z.object({
   id: z.number(),
   width: z.number(),
-  heigth: z.number(),
+  height: z.number(),
   url: z.string(),
   src: z.object({
     large: z.string(),
